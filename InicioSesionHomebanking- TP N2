@@ -1,0 +1,86 @@
+Algoritmo InicioSesionHomebanking
+	
+    Definir usuarioRegistrado, contrasenaRegistrada como cadenas   // se definen las variables
+    Definir usuarioIngresado, contrasenaIngresada como cadenas
+    Definir intentos, cantidad como entero
+	Definir opcion como entero
+	definir saldo Como Real
+	
+    usuarioRegistrado = "user"    // inicializacion de variables
+    contrasenaRegistrada = "123"
+    intentos = 3
+	saldo = 10 // Saldo inicial de la cuenta, se puede cambiar si se desea. se define fuera de la estructura repetitiva ya que actua como acumulador
+	
+    Mientras intentos > 0 Hacer  //  se coloca condicion logica
+		Escribir "*****************************************************"
+        Escribir "Bienvenido al sistema de homebanking"
+        Escribir "Por favor, ingrese su nombre de usuario y contraseña"
+		Escribir "*****************************************************"
+        
+        Escribir "Nombre de usuario:"
+        Leer usuarioIngresado
+		
+        Escribir "Contraseña:"
+        Leer contrasenaIngresada
+		
+        Si usuarioIngresado = usuarioRegistrado Y contrasenaIngresada = contrasenaRegistrada Entonces
+            Escribir "Bienvenido al sistema de homebanking, ", usuarioIngresado
+            intentos = 0      // Terminar el bucle, inicio de sesión exitoso y redirige al menu de opciones
+		SiNo
+			
+			Repetir
+				Escribir "Menu de opciones:"
+				Escribir "[1] Consultar saldo"
+				Escribir "[2] Extraer dinero"
+				Escribir "[3] Depositar dinero"
+				Escribir "[4] Salir"
+				Escribir "Seleccione una opción: "
+				Leer opcion
+				
+				// Opción 1: Consultar saldo
+				Si opcion = 1 Entonces
+					Escribir "Su saldo actual es: ", saldo
+					
+					// Opción 2: Extraer dinero
+				Sino Si opcion = 2 Entonces
+						Escribir "Ingrese la cantidad que desea extraer:"
+						Leer cantidad
+						Si cantidad <= saldo Entonces
+							saldo = saldo - cantidad   // Acumulador se actualiza en cada iteracion
+							Escribir "Ha retirado ", cantidad, " correctamente. Su saldo actual es: ", saldo
+						Sino
+							Escribir "Fondos insuficientes. Su saldo actual es: ", saldo
+						FinSi
+						
+						// Opción 3: Depositar dinero
+					Sino Si opcion = 3 Entonces
+							Escribir "Ingrese la cantidad que desea depositar:"
+							Leer cantidad
+							saldo = saldo + cantidad
+							Escribir "Se ha depositado ", cantidad, " correctamente. Su saldo actual es: ", saldo
+							
+							// Opción 4: Salir
+						Sino Si opcion = 4 Entonces
+								Escribir "Gracias por utilizar nuestro servicio. ¡Hasta luego!"
+							Sino
+								Escribir "Opción inválida. Por favor, seleccione una opción válida."
+							FinSi
+						FinSi	
+						
+					FinSi
+					
+				FinSi
+				
+			Hasta Que opcion = 4
+			
+            Escribir "Usuario inexistente o contraseña incorrecta"
+            intentos = intentos - 1
+            Si intentos > 0 Entonces
+                Escribir "Le quedan ", intentos, " intentos."
+            Sino
+                Escribir "Ha excedido el número de intentos permitidos. Por favor, inténtelo más tarde."
+            FinSi
+			
+		finsi
+    FinMientras
+FinAlgoritmo
